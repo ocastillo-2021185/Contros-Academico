@@ -15,6 +15,7 @@ export const registerStudent = async (req, res) => {
         data.password = await encrypt(data.password)
         data.role = 'STUDENT_ROLE'
         let user = new User(data)
+        await user.save()
         return res.send({ message: `Registered teacher successfully, can be logged with username ${user.username}` })
     } catch (err) {
         console.error(err)
@@ -28,6 +29,7 @@ export const registerTeacher = async (req, res) => {
         data.password = await encrypt(data.password)
         data.role = 'TEACHER_ROLE'
         let user = new User(data)
+        await user.save()
         return res.send({ message: `Registered teacher successfully, can be logged with username ${user.username}` })
     } catch (err) {
         console.error(err)
@@ -78,8 +80,8 @@ export const updateUser = async (req, res) => {
     } catch (err) {
         console.error(err)
         if (err.keyValue.username) return res.status(400).send({ message: `Username ${err.keyValue.username} is alredy taken` })
-        return res.status(500).send({ message: 'Error updating account' })
-    }
+        return res.status(500).send({ message: 'Error updating accounst' })
+    } 
 }
 //------------------------------------------------------------------------------------------------------------
 export const deleteUser = async (req, res) => {
